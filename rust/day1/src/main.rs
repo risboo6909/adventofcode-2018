@@ -1,17 +1,5 @@
+use shared::parse_input;
 use std::collections::HashMap;
-use std::io::{self, BufRead};
-
-fn parse_input() -> Vec<isize> {
-    let mut numbers = Vec::new();
-    let stdin = io::stdin();
-
-    for line in stdin.lock().lines() {
-        let val = line.unwrap();
-        numbers.push(val.parse::<isize>().unwrap());
-    }
-
-    numbers
-}
 
 fn main() {
     let mut iter = 0;
@@ -19,7 +7,7 @@ fn main() {
     let mut repeated_value: Option<isize> = None;
     let mut freq: HashMap<isize, usize> = HashMap::new();
 
-    let numbers = parse_input();
+    let numbers = parse_input(|line| line.parse::<isize>().unwrap());
 
     while repeated_value == None {
         for value in &numbers {
