@@ -4,4 +4,5 @@ version = "0.1.0"
 authors = ["risboo6909 <risboo6909@yandex-team.ru>"]
 edition = "2018"
 
-[dependencies]
+[profile.release]
+opt-level = 3
