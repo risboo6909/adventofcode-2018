@@ -1,6 +1,5 @@
 use shared::parse_input;
 
-
 #[derive(Debug)]
 struct Container {
     max_value: Option<usize>,
@@ -11,7 +10,7 @@ struct Container {
 impl Container {
     pub(crate) fn new(max_value: Option<usize>) -> Self {
         Container {
-            max_value: max_value,
+            max_value,
             two: 0,
             three: 0,
         }
@@ -39,7 +38,7 @@ impl Container {
         }
     }
 
-    pub(crate) fn update(&mut self, other: Container) {
+    pub(crate) fn update(&mut self, other: &Container) {
         self.inc_two(other.two);
         self.inc_three(other.three);
     }
@@ -51,7 +50,7 @@ fn put_to_bucket(letter: char, buckets: &mut Vec<usize>) {
 }
 
 #[inline]
-fn scan_buckets(buckets: &Vec<usize>) -> Container {
+fn scan_buckets(buckets: &[usize]) -> Container {
     let mut res = Container::new(Some(1));
     for val in buckets {
         res.inc(*val);
@@ -74,9 +73,7 @@ fn str_diff(word1: &str, word2: &str) -> (usize, String) {
     (diffs, common_substr.into_iter().collect::<String>())
 }
 
-
 fn main() {
-
     let input_lines: Vec<String> = parse_input(|line| line.to_owned());
 
     // First part
@@ -92,7 +89,7 @@ fn main() {
             put_to_bucket(c, &mut buckets);
         }
 
-        res.update(scan_buckets(&buckets));
+        res.update(&scan_buckets(&buckets));
     }
 
     println!("Checksum: {}", res.two * res.three);
@@ -100,7 +97,6 @@ fn main() {
     // Second part
 
     for (idx, word1) in input_lines.iter().enumerate() {
-
         for word2 in input_lines.iter().skip(idx) {
             let (diff_count, common_substr) = str_diff(word1, word2);
             if diff_count == 1 {
@@ -108,7 +104,5 @@ fn main() {
                 break;
             }
         }
-
     }
-
 }
