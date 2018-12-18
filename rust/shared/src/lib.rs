@@ -1,8 +1,8 @@
 use std::io::{self, BufRead};
 
-pub fn parse_input<F, T>(func: F) -> Vec<T>
+pub fn parse_input<F, T>(mut func: F) -> Vec<T>
 where
-    F: Fn(&str) -> T,
+    F: FnMut(&str) -> T,
 {
     let mut output = Vec::new();
     for line in io::stdin().lock().lines() {
