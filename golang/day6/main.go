@@ -141,10 +141,10 @@ func prepareField(coords []Pair) [][]Cell {
 
 func traverse(y int, x int, id int, field [][]Cell) int {
 	// function returns -1 if Voronoi region area is infinite
-	// and a positive integer which represents an area otherwise
+	// or a positive integer which represents an area otherwise
 
 	// if something goes beyond the field this implies it will
-	// be continue infinitely
+	// continue infinitely
 
 	if x-1 < 0 {
 		return -1
